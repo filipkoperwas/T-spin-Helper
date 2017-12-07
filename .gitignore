@@ -4,5 +4,11 @@ cmake_install.cmake
 Makefile
 CMakeFiles/*
 
+#ignore .swp
+*.swp
+
+
+#ignore help
+help/*
 #ignore executables
 bin/*
