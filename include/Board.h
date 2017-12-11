@@ -1,5 +1,5 @@
-#ifndef Map_H
-#define Map_H
+#ifndef Board_H
+#define Board_H
 #include "Game.h"
 
 /*! \class Map
@@ -7,14 +7,14 @@
  *
  *  Detailed description
  */
-class Map 
+class Board 
 {
 public:
-    Map();
-    ~Map();
+    Board();
+    ~Board();
 
-    void loadMap(int arr[20][10]);
-    void drawMap();
+    void loadBoard(int arr[20][10]);
+    void drawBoard();
 
 private:
 
@@ -28,7 +28,7 @@ private:
    SDL_Texture* purple;
    SDL_Texture* yellow;
 
-   int map[20][10];
+   int board[20][10];
 };
 
 

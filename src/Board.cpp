@@ -1,11 +1,11 @@
-#include "../include/Map.h"
+#include "../include/Board.h"
 #include "../include/TextureManager.h"
 
 //Constants
 #define ROWS 20
 #define COLUMNS 10
 /*
-   This class draws a map of the tetris board. It
+   This class draws a board of the tetris board. It
    1 = blue
    2 = orange
    3 = red
@@ -37,7 +37,7 @@ int test[20][10] = {
     {7,7,5,5,5,5,4,7,7,0}
 };
 
-Map::Map() {
+Board::Board() {
     empty = TextureManager::LoadTexture("assets/empty_square.png");
     blue = TextureManager::LoadTexture("assets/blue_square.png");
     orange = TextureManager::LoadTexture("assets/orange_square.png");
@@ -49,7 +49,7 @@ Map::Map() {
 
 
 
-    loadMap(test);
+    loadBoard(test);
 
     src.x = 0;
     src.y = 0;
@@ -62,21 +62,21 @@ Map::Map() {
     dest.y = 0;
 }
 
-void Map::loadMap(int arr[20][10]) {
+void Board::loadBoard(int arr[20][10]) {
     for (int row = 0; row < ROWS; row++) {
         for(int column = 0; column < COLUMNS; column++) {
-            map[row][column] = arr[row][column];
+            board[row][column] = arr[row][column];
         }
         
     }
 
 }
 
-void Map::drawMap() {
+void Board::drawBoard() {
     int type = 0;
     for (int row = 0; row < ROWS; row++) {
         for(int column = 0; column < COLUMNS; column++) {
-            type = map[row][column];
+            type = board[row][column];
             dest.x = column * 32;
             dest.y = row * 32;
 

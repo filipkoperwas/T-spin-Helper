@@ -1,12 +1,12 @@
 #include "../include/Game.h"
 #include "../include/TextureManager.h"
 #include "../include/GameObject.h"
-#include "../include/Map.h"
+#include "../include/Board.h"
 
 SDL_Renderer* Game::renderer = nullptr;
 
 GameObject* player;
-Map* map;
+Board* board;
 
 Game::Game() {
 }
@@ -37,7 +37,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
     }
 
     player = new GameObject("assets/blue_square.png", 0, 0);
-    map = new Map();
+    board = new Board();
 
 }
 
@@ -59,7 +59,7 @@ void Game::update() {
 
 void Game::render() {
     SDL_RenderClear(Game::renderer);
-    map->drawMap();
+    board->drawBoard();
     player->render();
     SDL_RenderPresent(Game::renderer);
 }
