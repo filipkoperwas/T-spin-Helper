@@ -13,7 +13,7 @@ add_executable(bin/runTests EXCLUDE_FROM_ALL test/main_test.cpp)
 target_link_libraries(bin/runTests ${GTEST_LIBRARIES} pthread)
 
 #Make game executable
-add_executable(bin/${PROJECT_NAME} src/main.cpp src/Game.cpp src/TextureManager.cpp)
+add_executable(bin/${PROJECT_NAME} src/main.cpp src/Game.cpp src/TextureManager.cpp src/GameObject.cpp src/Map.cpp)
 
 INCLUDE(FindPkgConfig)
 

@@ -1,8 +1,12 @@
 #include "../include/Game.h"
 #include "../include/TextureManager.h"
+#include "../include/GameObject.h"
+#include "../include/Map.h"
 
-SDL_Texture* playerTex;
-SDL_Rect scrR, destR;
+SDL_Renderer* Game::renderer = nullptr;
+
+GameObject* player;
+Map* map;
 
 Game::Game() {
 }
@@ -21,9 +25,9 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
         if(window) {
             std::cout << "Window Created!" << std::endl;
         }
-        renderer = SDL_CreateRenderer(window, -1, 0);
-        if(renderer) {
-            SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+        Game::renderer = SDL_CreateRenderer(window, -1, 0);
+        if(Game::renderer) {
+            SDL_SetRenderDrawColor(Game::renderer, 255, 255, 255, 255);
             std::cout << "Renderer Created!" << std::endl;
         }
 
@@ -32,7 +36,9 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
         isRunning = false;
     }
 
-    playerTex = TextureManager::LoadTexture("assets/player.png", renderer);
+    player = new GameObject("assets/blue_square.png", 0, 0);
+    map = new Map();
+
 }
 
 void Game::handleEvents() {
@@ -48,23 +54,19 @@ void Game::handleEvents() {
 }
 
 void Game::update() {
-    cnt++;
-    destR.h = 64;
-    destR.w = 64;
-    destR.x = cnt;
-
-    std::cout << cnt << std::endl;
+    player->update();
 }
 
 void Game::render() {
-    SDL_RenderClear(renderer);
-    SDL_RenderCopy(renderer, playerTex, NULL, &destR);
-    SDL_RenderPresent(renderer);
+    SDL_RenderClear(Game::renderer);
+    map->drawMap();
+    player->render();
+    SDL_RenderPresent(Game::renderer);
 }
 
 void Game::clean() {
     SDL_DestroyWindow(window);
-    SDL_DestroyRenderer(renderer);
+    SDL_DestroyRenderer(Game::renderer);
     SDL_Quit();
     std::cout << "Game Cleaned" << std::endl;
 }
