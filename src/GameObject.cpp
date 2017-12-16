@@ -1,5 +1,6 @@
 #include "../include/GameObject.h"
 #include "../include/TextureManager.h"
+#include <stdio.h>
 
 GameObject::GameObject(const char* textureSheet, int x, int y) {
     //load object texture
@@ -11,7 +12,6 @@ GameObject::GameObject(const char* textureSheet, int x, int y) {
 }
 
 void GameObject::update() {
-    
     xpos++;
     ypos++;
     srcRect.h = 32;
@@ -27,4 +27,9 @@ void GameObject::update() {
 
 void GameObject::render() {
     SDL_RenderCopy(Game::renderer, objTexture, &srcRect, &destRect);
+}
+
+GameObject::~GameObject() {
+    SDL_DestroyTexture(objTexture);
+    std::cout << "Destroyed texture" << std::endl;
 }

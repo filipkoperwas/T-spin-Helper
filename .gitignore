@@ -4,6 +4,7 @@ cmake_install.cmake
 Makefile
 makefile
 CMakeFiles/*
+compile
 
 #ignore .swp
 *.swp
@@ -13,3 +14,7 @@ CMakeFiles/*
 help/*
 #ignore executables
 bin/*
+
+#ignore test files used to make sure googletest works
+test/tests.cpp
+test/whattotest.cpp

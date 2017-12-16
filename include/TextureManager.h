@@ -1,5 +1,5 @@
-#ifndef TextureManager_H
-#define TextureManager_H
+#ifndef TEXTUREMANAGER_H
+#define TEXTUREMANAGER_H
 
 #include "Game.h"
 class TextureManager {

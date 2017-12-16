@@ -77,7 +77,7 @@ void Board::drawBoard() {
     for (int row = 0; row < ROWS; row++) {
         for(int column = 0; column < COLUMNS; column++) {
             type = board[row][column];
-            dest.x = column * 32;
+            dest.x = column * 32 + 100;
             dest.y = row * 32;
 
             switch (type) {
@@ -110,4 +110,15 @@ void Board::drawBoard() {
             }
         }
     }
+}
+
+Board::~Board() {
+    SDL_DestroyTexture(empty);
+    SDL_DestroyTexture(blue);
+    SDL_DestroyTexture(orange);
+    SDL_DestroyTexture(green);
+    SDL_DestroyTexture(red);
+    SDL_DestroyTexture(teal);
+    SDL_DestroyTexture(purple);
+    SDL_DestroyTexture(yellow);
 }

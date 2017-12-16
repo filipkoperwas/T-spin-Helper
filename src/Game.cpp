@@ -2,10 +2,13 @@
 #include "../include/TextureManager.h"
 #include "../include/GameObject.h"
 #include "../include/Board.h"
+#include "../include/PieceBox.h"
+#include <vector>
 
 SDL_Renderer* Game::renderer = nullptr;
 
-GameObject* player;
+std::vector<GameObject*> gObjects;
+
 Board* board;
 
 Game::Game() {
@@ -36,9 +39,19 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
         isRunning = false;
     }
 
-    player = new GameObject("assets/blue_square.png", 0, 0);
     board = new Board();
-
+    PieceBox* holdBox = new PieceBox(10, 50, 2.5);
+    gObjects.push_back(holdBox);
+    PieceBox* nextBox1 = new PieceBox(450, 50, 2.25);
+    gObjects.push_back(nextBox1);
+    PieceBox* nextBox2 = new PieceBox(450, 125, 2);
+    gObjects.push_back(nextBox2);
+    PieceBox* nextBox3 = new PieceBox(450, 200, 2);
+    gObjects.push_back(nextBox3);
+    PieceBox* nextBox4 = new PieceBox(450, 270, 2);
+    gObjects.push_back(nextBox4);
+    PieceBox* nextBox5 = new PieceBox(450, 350, 2);
+    gObjects.push_back(nextBox5);
 }
 
 void Game::handleEvents() {
@@ -54,17 +67,28 @@ void Game::handleEvents() {
 }
 
 void Game::update() {
-    player->update();
+    for(GameObject* object : gObjects) {
+        object->update();
+    }
 }
 
 void Game::render() {
     SDL_RenderClear(Game::renderer);
     board->drawBoard();
-    player->render();
+    for(GameObject* object : gObjects) {
+        object->render();
+    }
     SDL_RenderPresent(Game::renderer);
 }
 
 void Game::clean() {
+    delete(board);
+    std::cout << "Cleaned board" << std::endl;
+    for(GameObject* object : gObjects) {
+        delete(object);
+    }
+    gObjects.clear();
+    std::cout << "Cleaned GObjects" << std::endl;
     SDL_DestroyWindow(window);
     SDL_DestroyRenderer(Game::renderer);
     SDL_Quit();

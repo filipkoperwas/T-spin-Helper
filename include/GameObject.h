@@ -1,5 +1,5 @@
-#ifndef GameObject_H
-#define GameObject_H
+#ifndef GAMEOBJECT_H
+#define GAMEOBJECT_H
 #include "Game.h"
 
 /*! \class GameObject
@@ -10,13 +10,14 @@
 class GameObject
 {
 public:
+    GameObject() {};//needed for child class constructors
     GameObject(const char* textureSheet, int x, int y);
-    ~GameObject();
+    virtual ~GameObject();
 
-    void update();
-    void render();
+    virtual void update();
+    virtual void render();
 
-private:
+protected:
     int xpos;
     int ypos;
 
